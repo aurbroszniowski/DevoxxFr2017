@@ -44,25 +44,23 @@ Pour avoir accès à la documentation, veuillez consulter les liens suivants:
 
 Voici la liste des exercices que nous aborderons:
 
-Exercice 1. Utiliser JCache
+Exercice 1. Cache pattern : Cache aside
 Utiliser l'API JCache afin d'intégrer un cache à l'application.
-
-Exercice 2. Cache pattern : Cache aside
 Utiliser la pattern Cache Aside.
 
-Exercice 3. Cache pattern : Cache through
+Exercice 2. Cache pattern : Cache through
 Utiliser la pattern Cache Through.
 
-Exercice 4. Tests de performances de votre application.
+Exercice 3. Tests de performances de votre application.
 Le warmup.
 Lancer différents tests de charges pour mesurer les gains de performances (volume de 100, 10000 et 1000000 de données).
 
-Exercice 5. Les statistiques.
+Exercice 4. Les statistiques.
 Utiliser les statistiques jsr107 dans le cadre des tests de performance.
 
-Exercice 6. Cache size
+Exercice 5. Cache size
 Le sizing du cache et jsr107. Solutions des providers JCache.
 
-Exercice 7. Configuration du cache
+Exercice 6. Configuration du cache
 Les trade-offs dans le caching (consistency, eviction, expiration (TTI/TTL))
 

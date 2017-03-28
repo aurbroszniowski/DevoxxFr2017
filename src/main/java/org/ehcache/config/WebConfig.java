@@ -12,7 +12,6 @@ public class WebConfig {
 
 	public WebConfig(SomeService service) {
 		this.service = service;
-//		staticFileLocation("/public");
 		setupRoutes();
 	}
 	

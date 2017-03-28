@@ -17,20 +17,20 @@ import javax.cache.spi.CachingProvider;
  */
 
 @Service
-public class Ex4Service implements SomeService {
+public class Ex3Service implements SomeService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger("org.ehcache.Demo");
 
   private SomeRepository repository = new SomeRepository();
   private Cache<String, String> cache;
 
-  public Ex4Service() throws URISyntaxException {
+  public Ex3Service() throws URISyntaxException {
     CachingProvider cachingProvider = Caching.getCachingProvider("org.ehcache.jsr107.EhcacheCachingProvider");
 
     CacheManager cacheManager = cachingProvider.getCacheManager(
-        getClass().getResource("/ehcache-ex4.xml").toURI(),
+        getClass().getResource("/ehcache-ex3.xml").toURI(),
         getClass().getClassLoader());
-    cache = cacheManager.getCache("someCache4", String.class, String.class);
+    cache = cacheManager.getCache("someCache3", String.class, String.class);
   }
 
   @Override

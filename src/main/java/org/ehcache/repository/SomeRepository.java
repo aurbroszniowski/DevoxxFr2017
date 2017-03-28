@@ -10,7 +10,7 @@ import java.util.Random;
  */
 public class SomeRepository {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger("org.jsoftbiz.Demo");
+  private static final Logger LOGGER = LoggerFactory.getLogger("org.ehcache.Demo");
 
   Random rnd = new Random();
 

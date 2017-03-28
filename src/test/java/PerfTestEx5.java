@@ -14,15 +14,9 @@ import io.rainfall.statistics.StatisticsHolder;
 import io.rainfall.statistics.StatisticsPeekHolder;
 import io.rainfall.unit.TimeDivision;
 import org.ehcache.service.Ex5Service;
-import org.ehcache.service.SomeService;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import javax.cache.management.CacheStatisticsMXBean;
-import javax.management.MBeanServer;
-import javax.management.MBeanServerInvocationHandler;
-import javax.management.ObjectName;
-import java.lang.management.ManagementFactory;
 import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.List;
@@ -46,21 +40,7 @@ public class PerfTestEx5 {
   public void perfTest() throws SyntaxException, URISyntaxException {
     final String opName = "SomeServiceOperation";
 
-    final CacheStatisticsMXBean cacheStatisticsMXBean;
-    try {
-      MBeanServer beanServer = ManagementFactory.getPlatformMBeanServer();
-      ObjectName objectName = new ObjectName("javax.cache:type=CacheStatistics,CacheManager="
-          + getClass().getResource("/ehcache-ex5.xml")
-          .toURI()
-          .toString()
-          .replace(":", ".") + ",Cache=someCache5");
-      cacheStatisticsMXBean = MBeanServerInvocationHandler.newProxyInstance(beanServer, objectName, CacheStatisticsMXBean.class, false);
-    } catch (Exception e) {
-      throw new RuntimeException(e);
-    }
-
-
-    SomeService service = new Ex5Service();
+    Ex5Service service = new Ex5Service();
 
     StringGenerator generator = new StringGenerator(4);
 
@@ -103,10 +83,7 @@ public class PerfTestEx5 {
 
               @Override
               public void report(final StatisticsPeekHolder statisticsPeekHolder) {
-                System.out.printf("Cache Gets: %d, ", cacheStatisticsMXBean.getCacheGets());
-                System.out.printf("Cache Miss count: %d, ", cacheStatisticsMXBean.getCacheMisses());
-                System.out.printf("Cache Hit percentage: %f, ", cacheStatisticsMXBean.getCacheHitPercentage());
-                System.out.printf("Cache Evictions count: %d\n", cacheStatisticsMXBean.getCacheEvictions());
+                service.dumpCounters();
               }
 
               @Override

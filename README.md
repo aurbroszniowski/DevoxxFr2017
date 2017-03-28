@@ -65,3 +65,4 @@ Exercice 6. Configuration du cache
 Les trade-offs dans le caching (consistency, eviction, expiration (TTI/TTL))
 
 Exercice 7. Plus de perf : les serializers / copiers
+Quand, comment et pourquoi les serializers / copiers sont utilises, leur impact sur les perf et comment les optimiser

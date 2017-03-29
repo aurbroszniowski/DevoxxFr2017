@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class Ex1Service implements SomeService {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger("org.jsoftbiz.Demo");
+  private static final Logger LOGGER = LoggerFactory.getLogger("org.ehcache.Demo");
 
   private SomeRepository repository = new SomeRepository();
 

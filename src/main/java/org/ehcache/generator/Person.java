@@ -22,7 +22,7 @@ public class Person implements Serializable {
   protected Gender gender;
   protected Date dateOfBirth;
   protected Date dateOfJoining;
-  protected Address address;
+  protected String address;
   protected byte[] rawData;
 
   public Person() {}
@@ -41,7 +41,7 @@ public class Person implements Serializable {
     if (street == null && city == null && state == null) {
       this.address = null;
     } else {
-      this.address = new Address(street, city, state);
+      this.address = street + " " + city + " " + state;
     }
     this.rawData = raw;
     this.dateOfBirth = dateOfBirth;
@@ -101,7 +101,7 @@ public class Person implements Serializable {
            + getDateOfBirth() + ", DOJ: " + getDateOfJoining() + ")";
   }
 
-  public Address getAddress() {
+  public String getAddress() {
     return address;
   }
 

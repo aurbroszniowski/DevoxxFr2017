@@ -1,6 +1,7 @@
 import io.rainfall.AssertionEvaluator;
 import io.rainfall.Configuration;
 import io.rainfall.Operation;
+import io.rainfall.Reporter;
 import io.rainfall.Runner;
 import io.rainfall.Scenario;
 import io.rainfall.SequenceGenerator;
@@ -10,9 +11,9 @@ import io.rainfall.configuration.ConcurrencyConfig;
 import io.rainfall.generator.RandomSequenceGenerator;
 import io.rainfall.generator.StringGenerator;
 import io.rainfall.statistics.StatisticsHolder;
+import io.rainfall.statistics.StatisticsPeekHolder;
 import io.rainfall.unit.TimeDivision;
-import org.ehcache.service.Ex3Service;
-import org.ehcache.service.SomeService;
+import org.ehcache.service.Ex5Service;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -24,25 +25,22 @@ import java.util.concurrent.TimeUnit;
 
 import static io.rainfall.configuration.ReportingConfig.html;
 import static io.rainfall.configuration.ReportingConfig.report;
-import static io.rainfall.configuration.ReportingConfig.text;
 import static io.rainfall.execution.Executions.during;
 import static io.rainfall.generator.sequence.Distribution.SLOW_GAUSSIAN;
 
 /**
  * @author Aurelien Broszniowski
  */
-public class PerfTestEx3 {
+public class PerfTestEx5 {
 
-  private static final int ENTRIES_MAX_COUNT = 100;
-//  private static int ENTRIES_MAX_COUNT = 200;
-//  private static int ENTRIES_MAX_COUNT = 1000;
+  private static final int ENTRIES_MAX_COUNT = 1000;
 
   @Test
   @Ignore
   public void perfTest() throws SyntaxException, URISyntaxException {
     final String opName = "SomeServiceOperation";
 
-    SomeService service = new Ex3Service();
+    Ex5Service service = new Ex5Service();
 
     StringGenerator generator = new StringGenerator(4);
 
@@ -77,7 +75,22 @@ public class PerfTestEx3 {
         .config(ConcurrencyConfig.concurrencyConfig()
             .threads(Runtime.getRuntime().availableProcessors())
             .timeout(30, TimeUnit.MINUTES))
-        .config(report(Results.class).log(text(), html("./target/Ex3-Rainfall-report-" + ENTRIES_MAX_COUNT)))
+        .config(report(Results.class).log(
+            new Reporter() {
+              @Override
+              public void header(final List list) {
+              }
+
+              @Override
+              public void report(final StatisticsPeekHolder statisticsPeekHolder) {
+                service.dumpCounters();
+              }
+
+              @Override
+              public void summarize(final StatisticsHolder statisticsHolder) {
+
+              }
+            }, html("./target/Ex5-Rainfall-report-" + ENTRIES_MAX_COUNT)))
         .start();
   }
 

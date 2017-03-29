@@ -52,7 +52,6 @@ Exercice 2. Cache pattern : Cache through
 Utiliser la pattern Cache Through.
 
 Exercice 3. Tests de performances de votre application.
-Le warmup.
 Lancer différents tests de charges pour mesurer les gains de performances (volume de 100, 10000 et 1000000 de données).
 
 Exercice 4. Les statistiques.
@@ -61,8 +60,13 @@ Utiliser les statistiques jsr107 dans le cadre des tests de performance.
 Exercice 5. Cache size
 Le sizing du cache et jsr107. Solutions des providers JCache.
 
-Exercice 6. Configuration du cache
-Les trade-offs dans le caching (consistency, eviction, expiration (TTI/TTL))
+Exercice 6. Warmup et performance
+Le warmup.
+Disk persistency
 
 Exercice 7. Plus de perf : les serializers / copiers
 Quand, comment et pourquoi les serializers / copiers sont utilises, leur impact sur les perf et comment les optimiser
+
+Exercice 8. Configuration du cache
+Les trade-offs dans le caching (consistency, eviction advisor, expiration (TTI/TTL))
+

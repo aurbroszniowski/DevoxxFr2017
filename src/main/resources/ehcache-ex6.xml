@@ -6,17 +6,15 @@
                         http://www.ehcache.org/v3/management http://www.ehcache.org/schema/ehcache-management-ext-3.3.xsd">
 
   <service>
-    <mnm:management cache-manager-alias="someCacheManager5"/>
+    <mnm:management cache-manager-alias="someCacheManager6"/>
   </service>
   <persistence directory="./target/cache-data"/>
 
-  <cache alias="someCache5">
+  <cache alias="someCache6">
     <key-type>java.lang.Long</key-type>
     <value-type>org.ehcache.generator.Person</value-type>
     <resources>
-      <heap unit="entries">1</heap>
-      <offheap unit="MB">10</offheap>
-      <disk unit="MB">200</disk>
+      <disk unit="MB" persistent="true">200</disk>
     </resources>
   </cache>
 

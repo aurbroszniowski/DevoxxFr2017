@@ -39,6 +39,12 @@ public class Ex5Service implements SomeService {
   public void dumpCounters() {
     ContextualStatistics contextualStatistics = queryStats();
 
+    System.out.printf("[Cache]");
+    System.out.printf("  HitCount : %7d  MissCount : %7d  EvictionCount : %7d    ",
+        contextualStatistics.getStatistic("Cache:HitCount").longValue(),
+        contextualStatistics.getStatistic("Cache:MissCount").longValue(),
+        contextualStatistics.getStatistic("Cache:EvictionCount").longValue()
+    );
     System.out.printf("[Heap]");
     System.out.printf("  HitCount : %7d  MissCount : %7d  EvictionCount : %7d    ",
         contextualStatistics.getStatistic("OnHeap:HitCount").longValue(),

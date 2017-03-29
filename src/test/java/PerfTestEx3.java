@@ -11,8 +11,6 @@ import io.rainfall.generator.RandomSequenceGenerator;
 import io.rainfall.generator.StringGenerator;
 import io.rainfall.statistics.StatisticsHolder;
 import io.rainfall.unit.TimeDivision;
-import org.ehcache.service.Ex1Service;
-import org.ehcache.service.Ex2Service;
 import org.ehcache.service.Ex3Service;
 import org.ehcache.service.SomeService;
 import org.junit.Ignore;
@@ -35,9 +33,9 @@ import static io.rainfall.generator.sequence.Distribution.SLOW_GAUSSIAN;
  */
 public class PerfTestEx3 {
 
-  private static int entriesMaxCount = 100;
-//  private static int entriesMaxCount = 200;
-//  private static int entriesMaxCount = 1000;
+  private static final int ENTRIES_MAX_COUNT = 100;
+//  private static int ENTRIES_MAX_COUNT = 200;
+//  private static int ENTRIES_MAX_COUNT = 1000;
 
   @Test
   @Ignore
@@ -48,7 +46,7 @@ public class PerfTestEx3 {
 
     StringGenerator generator = new StringGenerator(4);
 
-    SequenceGenerator sequenceGenerator = new RandomSequenceGenerator(SLOW_GAUSSIAN, 0, entriesMaxCount, entriesMaxCount / 10);
+    SequenceGenerator sequenceGenerator = new RandomSequenceGenerator(SLOW_GAUSSIAN, 0, ENTRIES_MAX_COUNT, ENTRIES_MAX_COUNT / 10);
 
     Runner.setUp(
         Scenario.scenario("load test")
@@ -79,7 +77,7 @@ public class PerfTestEx3 {
         .config(ConcurrencyConfig.concurrencyConfig()
             .threads(Runtime.getRuntime().availableProcessors())
             .timeout(30, TimeUnit.MINUTES))
-        .config(report(Results.class).log(text(), html("Rainfall-report-" + entriesMaxCount)))
+        .config(report(Results.class).log(text(), html("./target/Ex3-Rainfall-report-" + ENTRIES_MAX_COUNT)))
         .start();
   }
 

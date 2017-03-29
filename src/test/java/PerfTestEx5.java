@@ -33,7 +33,7 @@ import static io.rainfall.generator.sequence.Distribution.SLOW_GAUSSIAN;
  */
 public class PerfTestEx5 {
 
-  private static int entriesMaxCount = 1000;
+  private static final int ENTRIES_MAX_COUNT = 1000;
 
   @Test
   @Ignore
@@ -44,7 +44,7 @@ public class PerfTestEx5 {
 
     StringGenerator generator = new StringGenerator(4);
 
-    SequenceGenerator sequenceGenerator = new RandomSequenceGenerator(SLOW_GAUSSIAN, 0, entriesMaxCount, entriesMaxCount / 10);
+    SequenceGenerator sequenceGenerator = new RandomSequenceGenerator(SLOW_GAUSSIAN, 0, ENTRIES_MAX_COUNT, ENTRIES_MAX_COUNT / 10);
 
     Runner.setUp(
         Scenario.scenario("load test")
@@ -90,7 +90,7 @@ public class PerfTestEx5 {
               public void summarize(final StatisticsHolder statisticsHolder) {
 
               }
-            }, html("Rainfall-report-" + entriesMaxCount)))
+            }, html("./target/Ex5-Rainfall-report-" + ENTRIES_MAX_COUNT)))
         .start();
   }
 

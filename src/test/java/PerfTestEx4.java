@@ -14,21 +14,14 @@ import io.rainfall.statistics.StatisticsHolder;
 import io.rainfall.statistics.StatisticsPeekHolder;
 import io.rainfall.unit.TimeDivision;
 import org.ehcache.service.Ex4Service;
-import org.ehcache.service.SomeService;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.lang.management.ManagementFactory;
 import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
-import javax.cache.management.CacheStatisticsMXBean;
-import javax.management.MBeanServer;
-import javax.management.MBeanServerInvocationHandler;
-import javax.management.ObjectName;
 
 import static io.rainfall.configuration.ReportingConfig.html;
 import static io.rainfall.configuration.ReportingConfig.report;
@@ -40,20 +33,20 @@ import static io.rainfall.generator.sequence.Distribution.SLOW_GAUSSIAN;
  */
 public class PerfTestEx4 {
 
-  private static int entriesMaxCount = 100;
-//  private static int entriesMaxCount = 200;
-//  private static int entriesMaxCount = 1000;
+  private static final int ENTRIES_MAX_COUNT = 100;
+//  private static int ENTRIES_MAX_COUNT = 200;
+//  private static int ENTRIES_MAX_COUNT = 1000;
 
   @Test
   @Ignore
   public void perfTest() throws SyntaxException, URISyntaxException {
     final String opName = "SomeServiceOperation";
 
-    SomeService service = new Ex4Service();
+    Ex4Service service = new Ex4Service();
 
     StringGenerator generator = new StringGenerator(4);
 
-    SequenceGenerator sequenceGenerator = new RandomSequenceGenerator(SLOW_GAUSSIAN, 0, entriesMaxCount, entriesMaxCount / 10);
+    SequenceGenerator sequenceGenerator = new RandomSequenceGenerator(SLOW_GAUSSIAN, 0, ENTRIES_MAX_COUNT, ENTRIES_MAX_COUNT / 10);
 
     Runner.setUp(
         Scenario.scenario("load test")
@@ -86,36 +79,20 @@ public class PerfTestEx4 {
             .timeout(30, TimeUnit.MINUTES))
         .config(report(Results.class).log(
             new Reporter() {
-              CacheStatisticsMXBean cacheStatisticsMXBean;
 
               @Override
               public void header(final List list) {
-                try {
-                  MBeanServer beanServer = ManagementFactory.getPlatformMBeanServer();
-                  ObjectName objectName = new ObjectName("javax.cache:type=CacheStatistics,CacheManager="
-                                                         + getClass().getResource("/ehcache-ex4.xml")
-                                                             .toURI()
-                                                             .toString()
-                                                             .replace(":", ".") + ",Cache=someCache4");
-                  cacheStatisticsMXBean = MBeanServerInvocationHandler.newProxyInstance(beanServer, objectName, CacheStatisticsMXBean.class, false);
-                } catch (Exception e) {
-                  throw new RuntimeException(e);
-                }
               }
 
               @Override
               public void report(final StatisticsPeekHolder statisticsPeekHolder) {
-                System.out.printf("Cache Gets: %d, ", cacheStatisticsMXBean.getCacheGets());
-                System.out.printf("Cache Miss count: %d, ", cacheStatisticsMXBean.getCacheMisses());
-                System.out.printf("Cache Hit percentage: %f, ", cacheStatisticsMXBean.getCacheHitPercentage());
-                System.out.printf("Cache Evictions count: %d\n", cacheStatisticsMXBean.getCacheEvictions());
+                service.dumpCounters();
               }
 
               @Override
               public void summarize(final StatisticsHolder statisticsHolder) {
-
               }
-            }, html("Rainfall-report-" + entriesMaxCount)))
+            }, html("./target/Ex4-Rainfall-report-" + ENTRIES_MAX_COUNT)))
         .start();
   }
 

@@ -11,11 +11,14 @@ import io.rainfall.generator.RandomSequenceGenerator;
 import io.rainfall.generator.StringGenerator;
 import io.rainfall.statistics.StatisticsHolder;
 import io.rainfall.unit.TimeDivision;
+import org.ehcache.service.Ex1Service;
 import org.ehcache.service.Ex2Service;
+import org.ehcache.service.Ex3Service;
 import org.ehcache.service.SomeService;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -30,17 +33,22 @@ import static io.rainfall.generator.sequence.Distribution.SLOW_GAUSSIAN;
 /**
  * @author Aurelien Broszniowski
  */
-public class PerfTest {
+public class PerfTestEx3 {
+
+  private static int entriesMaxCount = 100;
+//  private static int entriesMaxCount = 200;
+//  private static int entriesMaxCount = 1000;
 
   @Test
   @Ignore
-  public void perfTest() throws SyntaxException {
+  public void perfTest() throws SyntaxException, URISyntaxException {
     final String opName = "SomeServiceOperation";
 
-    SomeService service = new Ex2Service();
+    SomeService service = new Ex3Service();
 
     StringGenerator generator = new StringGenerator(4);
-    SequenceGenerator sequenceGenerator = new RandomSequenceGenerator(SLOW_GAUSSIAN, 0, 1000, 100);
+
+    SequenceGenerator sequenceGenerator = new RandomSequenceGenerator(SLOW_GAUSSIAN, 0, entriesMaxCount, entriesMaxCount / 10);
 
     Runner.setUp(
         Scenario.scenario("load test")
@@ -66,10 +74,12 @@ public class PerfTest {
               }
             })
     )
-        .warmup(during(45, TimeDivision.seconds))
+        .warmup(during(20, TimeDivision.seconds))
         .executed(during(1, TimeDivision.minutes))
-        .config(ConcurrencyConfig.concurrencyConfig().threads(4).timeout(30, TimeUnit.MINUTES))
-        .config(report(Results.class).log(text(), html()))
+        .config(ConcurrencyConfig.concurrencyConfig()
+            .threads(Runtime.getRuntime().availableProcessors())
+            .timeout(30, TimeUnit.MINUTES))
+        .config(report(Results.class).log(text(), html("Rainfall-report-" + entriesMaxCount)))
         .start();
   }
 

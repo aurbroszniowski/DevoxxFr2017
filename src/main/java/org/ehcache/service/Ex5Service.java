@@ -16,6 +16,7 @@ import javax.cache.Cache;
 import javax.cache.CacheManager;
 import javax.cache.Caching;
 import javax.cache.spi.CachingProvider;
+import java.util.NoSuchElementException;
 
 /**
  * Example service : Cache aside with sized cache
@@ -47,24 +48,39 @@ public class Ex5Service implements SomeService {
         contextualStatistics.getStatistic("Cache:MissCount").longValue(),
         contextualStatistics.getStatistic("Cache:EvictionCount").longValue()
     );
-    System.out.printf("[Heap]");
-    System.out.printf("  HitCount : %7d  MissCount : %7d  EvictionCount : %7d    ",
-        contextualStatistics.getStatistic("OnHeap:HitCount").longValue(),
-        contextualStatistics.getStatistic("OnHeap:MissCount").longValue(),
-        contextualStatistics.getStatistic("OnHeap:EvictionCount").longValue()
-    );
-    System.out.printf("[OffHeap]");
-    System.out.printf("  HitCount : %7d  MissCount : %7d  EvictionCount : %7d    ",
-        contextualStatistics.getStatistic("OffHeap:HitCount").longValue(),
-        contextualStatistics.getStatistic("OffHeap:MissCount").longValue(),
-        contextualStatistics.getStatistic("OffHeap:EvictionCount").longValue()
-    );
-    System.out.printf("[Disk]");
-    System.out.printf("  HitCount : %7d  MissCount : %7d  EvictionCount : %7d    ",
-        contextualStatistics.getStatistic("Disk:HitCount").longValue(),
-        contextualStatistics.getStatistic("Disk:MissCount").longValue(),
-        contextualStatistics.getStatistic("Disk:EvictionCount").longValue()
-    );
+    try {
+      Number hitCount = contextualStatistics.getStatistic("OnHeap:HitCount");
+      System.out.printf("[Heap]");
+      System.out.printf("  HitCount : %7d  MissCount : %7d  EvictionCount : %7d    ",
+          hitCount.longValue(),
+          contextualStatistics.getStatistic("OnHeap:MissCount").longValue(),
+          contextualStatistics.getStatistic("OnHeap:EvictionCount").longValue()
+      );
+    } catch (NoSuchElementException e) {
+      // no heap
+    }
+    try {
+      Number hitCount = contextualStatistics.getStatistic("OffHeap:HitCount");
+      System.out.printf("[OffHeap]");
+      System.out.printf("  HitCount : %7d  MissCount : %7d  EvictionCount : %7d    ",
+          hitCount.longValue(),
+          contextualStatistics.getStatistic("OffHeap:MissCount").longValue(),
+          contextualStatistics.getStatistic("OffHeap:EvictionCount").longValue()
+      );
+    } catch (NoSuchElementException e) {
+      // no offheap
+    }
+    try {
+      Number hitCount = contextualStatistics.getStatistic("Disk:HitCount");
+      System.out.printf("[Disk]");
+      System.out.printf("  HitCount : %7d  MissCount : %7d  EvictionCount : %7d    ",
+          hitCount.longValue(),
+          contextualStatistics.getStatistic("Disk:MissCount").longValue(),
+          contextualStatistics.getStatistic("Disk:EvictionCount").longValue()
+      );
+    } catch (NoSuchElementException e) {
+      // no disk
+    }
     System.out.println();
   }
 

@@ -1,5 +1,6 @@
 package org.ehcache.service;
 
+import org.ehcache.generator.Person;
 import org.ehcache.repository.SomeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,9 +15,8 @@ import javax.cache.spi.CachingProvider;
 
 /**
  * Example service : Cache through
- *
+ * <p>
  * Please implement TODO lines
- *
  */
 
 @Service
@@ -25,25 +25,25 @@ public class Ex2Service implements SomeService {
   private static final Logger LOGGER = LoggerFactory.getLogger("org.ehcache.Demo");
 
   private SomeRepository repository = new SomeRepository();
-  private Cache<String, String> cache;
+  private Cache<Long, Person> cache;
 
   public Ex2Service() {
     CachingProvider provider = Caching.getCachingProvider("org.ehcache.jsr107.EhcacheCachingProvider");
     CacheManager cacheManager = provider.getCacheManager();
 
-    MutableConfiguration<String, String> configuration = new MutableConfiguration<>();
-    configuration.setTypes(String.class, String.class);
+    MutableConfiguration<Long, Person> configuration = new MutableConfiguration<>();
+    configuration.setTypes(Long.class, Person.class);
     configuration.setCacheLoaderFactory(new FactoryBuilder.ClassFactory<>("org.ehcache.service.SomeCacheLoader"));
     configuration.setReadThrough(true);
     cache = cacheManager.createCache("someCache2", configuration);
   }
 
   @Override
-  public String someLogic(final String id) {
+  public Person someLogic(final Long id) {
     LOGGER.debug("---> Call to service 2");
 
     // TODO : Get the value from the cache directly instead
-    String val = cache.get(id);
+    Person val = cache.get(id);
     return val;
   }
 }

@@ -1,5 +1,6 @@
 package org.ehcache.service;
 
+import org.ehcache.generator.Person;
 import org.ehcache.repository.SomeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +23,7 @@ public class Ex3Service implements SomeService {
   private static final Logger LOGGER = LoggerFactory.getLogger("org.ehcache.Demo");
 
   private SomeRepository repository = new SomeRepository();
-  private Cache<String, String> cache;
+  private Cache<Long, Person> cache;
 
   public Ex3Service() throws URISyntaxException {
     CachingProvider cachingProvider = Caching.getCachingProvider("org.ehcache.jsr107.EhcacheCachingProvider");
@@ -30,12 +31,12 @@ public class Ex3Service implements SomeService {
     CacheManager cacheManager = cachingProvider.getCacheManager(
         getClass().getResource("/ehcache-ex3.xml").toURI(),
         getClass().getClassLoader());
-    cache = cacheManager.getCache("someCache3", String.class, String.class);
+    cache = cacheManager.getCache("someCache3", Long.class, Person.class);
   }
 
   @Override
-  public String someLogic(final String id) {
-    String value = cache.get(id);
+  public Person someLogic(final Long id) {
+    Person value = cache.get(id);
     if (value != null) {
       return value;
     }

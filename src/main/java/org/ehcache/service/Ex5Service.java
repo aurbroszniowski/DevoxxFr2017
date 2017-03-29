@@ -1,6 +1,7 @@
 package org.ehcache.service;
 
 import org.ehcache.core.internal.service.ServiceLocator;
+import org.ehcache.generator.Person;
 import org.ehcache.management.ManagementRegistryService;
 import org.ehcache.repository.SomeRepository;
 import org.springframework.stereotype.Service;
@@ -8,12 +9,13 @@ import org.terracotta.management.model.context.Context;
 import org.terracotta.management.model.stats.ContextualStatistics;
 import org.terracotta.management.registry.ResultSet;
 
+import java.lang.reflect.Field;
+import java.net.URISyntaxException;
+
 import javax.cache.Cache;
 import javax.cache.CacheManager;
 import javax.cache.Caching;
 import javax.cache.spi.CachingProvider;
-import java.lang.reflect.Field;
-import java.net.URISyntaxException;
 import java.util.NoSuchElementException;
 
 /**
@@ -24,7 +26,7 @@ import java.util.NoSuchElementException;
 public class Ex5Service implements SomeService {
 
   private SomeRepository repository = new SomeRepository();
-  private Cache<String, String> cache;
+  private Cache<Long, Person> cache;
   private final ManagementRegistryService managementRegistry;
 
   public Ex5Service() throws URISyntaxException {
@@ -33,7 +35,7 @@ public class Ex5Service implements SomeService {
     CacheManager cacheManager = cachingProvider.getCacheManager(
         getClass().getResource("/ehcache-ex5.xml").toURI(),
         getClass().getClassLoader());
-    cache = cacheManager.getCache("someCache5", String.class, String.class);
+    cache = cacheManager.getCache("someCache5", Long.class, Person.class);
     managementRegistry = getManagementRegistryService(cacheManager);
   }
 
@@ -101,7 +103,7 @@ public class Ex5Service implements SomeService {
       org.ehcache.CacheManager unwrap = cacheManager.unwrap(org.ehcache.CacheManager.class);
       Field serviceLocatorField = org.ehcache.core.EhcacheManager.class.getDeclaredField("serviceLocator");
       serviceLocatorField.setAccessible(true);
-      ServiceLocator result = (ServiceLocator) serviceLocatorField.get(unwrap);
+      ServiceLocator result = (ServiceLocator)serviceLocatorField.get(unwrap);
       return result.getService(ManagementRegistryService.class);
     } catch (Exception e) {
       throw new RuntimeException(e);
@@ -109,8 +111,8 @@ public class Ex5Service implements SomeService {
   }
 
   @Override
-  public String someLogic(final String id) {
-    String value = cache.get(id);
+  public Person someLogic(final Long id) {
+    Person value = cache.get(id);
     if (value != null) {
       return value;
     }

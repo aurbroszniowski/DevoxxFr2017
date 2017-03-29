@@ -1,11 +1,14 @@
 package org.ehcache.service;
 
+import org.ehcache.generator.Person;
+
 /**
  * Cache performance test
  */
 public class Ex8Service implements SomeService {
   @Override
-  public String someLogic(final String id) {
+  public Person someLogic(final Long
+                                id) {
     //TODO : use Exercise 2 (Cache aside) or Exercise 3 (cache through) code. And execute the Performance Test
     //      "PerfTest".
     //      the resulting report will be available in the directory "target/rainfall-report"

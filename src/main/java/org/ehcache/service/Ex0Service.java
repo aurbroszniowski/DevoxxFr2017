@@ -1,5 +1,6 @@
 package org.ehcache.service;
 
+import org.ehcache.generator.Person;
 import org.ehcache.repository.SomeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +17,7 @@ public class Ex0Service implements SomeService {
   private SomeRepository repository = new SomeRepository();
 
   @Override
-  public String someLogic(final String id) {
+  public Person someLogic(final Long id) {
     LOGGER.debug("---> Call to service 1");
     return repository.readFromDb(id);
   }

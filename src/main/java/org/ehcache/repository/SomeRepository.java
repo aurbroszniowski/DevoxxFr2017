@@ -1,5 +1,7 @@
 package org.ehcache.repository;
 
+import org.ehcache.generator.Person;
+import org.ehcache.generator.PersonGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,20 +16,22 @@ public class SomeRepository {
 
   Random rnd = new Random();
 
+  PersonGenerator personGenerator = new PersonGenerator(1024);
+
   /**
    * Simulates a DB write call - takes between 100ms and 1100ms
    *
-   * @param value to be written
+   * @param key to find a Person
    * @return String written
    */
-  public String readFromDb(String value) {
+  public Person readFromDb(Long key) {
     LOGGER.debug(" Call to DB");
     try {
       Thread.sleep(100 + rnd.nextInt(1000));
     } catch (InterruptedException e) {
-      Thread.currentThread().interrupt();
+      Thread.currentThread().interrupt();   // Dedicated to Alex Snaps
     }
 
-    return "Hello " + value;
+    return personGenerator.generate(key);
   }
 }

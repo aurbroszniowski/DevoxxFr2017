@@ -1,5 +1,6 @@
 package org.ehcache.service;
 
+import org.ehcache.generator.Person;
 import org.ehcache.repository.SomeRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ import java.net.URISyntaxException;
 public class Ex4Service implements SomeService {
 
   private SomeRepository repository = new SomeRepository();
-  private Cache<String, String> cache;
+  private Cache<Long, Person> cache;
   private CacheStatisticsMXBean cacheStatisticsMXBean;
 
   public Ex4Service() throws URISyntaxException {
@@ -31,7 +32,7 @@ public class Ex4Service implements SomeService {
     CacheManager cacheManager = cachingProvider.getCacheManager(
         getClass().getResource("/ehcache-ex4.xml").toURI(),
         getClass().getClassLoader());
-    cache = cacheManager.getCache("someCache4", String.class, String.class);
+    cache = cacheManager.getCache("someCache4", Long.class, Person.class);
 
     try {
       MBeanServer beanServer = ManagementFactory.getPlatformMBeanServer();
@@ -54,8 +55,8 @@ public class Ex4Service implements SomeService {
   }
 
   @Override
-  public String someLogic(final String id) {
-    String value = cache.get(id);
+  public Person someLogic(final Long id) {
+    Person value = cache.get(id);
     if (value != null) {
       return value;
     }

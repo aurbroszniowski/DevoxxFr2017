@@ -1,5 +1,6 @@
 package org.ehcache.service;
 
+import org.ehcache.generator.Person;
 import org.ehcache.repository.SomeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,7 @@ public class Ex1Service implements SomeService {
   private static final Logger LOGGER = LoggerFactory.getLogger("org.ehcache.Demo");
 
   private SomeRepository repository = new SomeRepository();
-  private Cache<String, String> cache;
+  private Cache<Long, Person> cache;
 
   public Ex1Service() {
     // TODO : get Ehcache as caching provider ("org.ehcache.jsr107.EhcacheCachingProvider")
@@ -33,21 +34,21 @@ public class Ex1Service implements SomeService {
     // TODO : Get javax.cache.CacheManager from caching provider
     CacheManager cacheManager = cachingProvider.getCacheManager();
 
-    MutableConfiguration<String, String> configuration = new MutableConfiguration<>();
-    configuration.setTypes(String.class, String.class);
+    MutableConfiguration<Long, Person> configuration = new MutableConfiguration<>();
+    configuration.setTypes(Long.class, Person.class);
     // TODO Create Cache
     cache = cacheManager.createCache("someCache1", configuration);
   }
 
   @Override
-  public String someLogic(final String id) {
+  public Person someLogic(final Long id) {
     LOGGER.debug("---> Call to service 1");
 
     // TODO implements Cache Aside pattern to cache the call to the repository
     // pattern :
 
     // is value in cache for the id?
-    String value = cache.get(id);
+    Person value = cache.get(id);
     if (value != null){
       // if yes -> return value
       return value;

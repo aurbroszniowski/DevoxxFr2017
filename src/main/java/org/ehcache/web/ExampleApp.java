@@ -2,6 +2,7 @@ package org.ehcache.web;
 
 import org.ehcache.config.WebConfig;
 import org.ehcache.service.Ex0Service;
+import org.ehcache.service.Ex1Service;
 import org.ehcache.service.SomeService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;

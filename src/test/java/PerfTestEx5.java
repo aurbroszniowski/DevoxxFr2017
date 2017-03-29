@@ -8,6 +8,7 @@ import io.rainfall.SequenceGenerator;
 import io.rainfall.SyntaxException;
 import io.rainfall.TestException;
 import io.rainfall.configuration.ConcurrencyConfig;
+import io.rainfall.generator.LongGenerator;
 import io.rainfall.generator.RandomSequenceGenerator;
 import io.rainfall.generator.StringGenerator;
 import io.rainfall.statistics.StatisticsHolder;
@@ -42,7 +43,7 @@ public class PerfTestEx5 {
 
     Ex5Service service = new Ex5Service();
 
-    StringGenerator generator = new StringGenerator(4);
+    LongGenerator generator = new LongGenerator();
 
     SequenceGenerator sequenceGenerator = new RandomSequenceGenerator(SLOW_GAUSSIAN, 0, ENTRIES_MAX_COUNT, ENTRIES_MAX_COUNT / 10);
 
@@ -54,7 +55,7 @@ public class PerfTestEx5 {
                                final Map<Class<? extends Configuration>, Configuration> map,
                                final List<AssertionEvaluator> list) throws TestException {
                 long next = sequenceGenerator.next();
-                String id = generator.generate(next);
+                Long id = generator.generate(next);
 
                 long start = getTimeInNs();
                 // This is what we measure

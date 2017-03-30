@@ -90,7 +90,7 @@ public class PerfTestEx6 {
               public void summarize(final StatisticsHolder statisticsHolder) {
 
               }
-            }, html("./target/Ex6-Rainfall-report-" + ENTRIES_MAX_COUNT)))
+            }, html("./target/Ex6/Rainfall-report-" + ENTRIES_MAX_COUNT)))
         .start();
   }
 

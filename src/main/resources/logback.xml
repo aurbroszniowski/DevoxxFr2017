@@ -6,9 +6,6 @@
     </encoder>
   </appender>
 
-  <logger name="org.ehcache.Demo" level="off"/>
-  <logger name="org.ehcache" level="off"/>
-
   <root level="info">
     <appender-ref ref="STDOUT"/>
   </root>

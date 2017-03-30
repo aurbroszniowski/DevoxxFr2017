@@ -36,6 +36,8 @@ public class Ex7Service implements SomeService {
         getClass().getResource("/ehcache-ex7.xml").toURI(),
         getClass().getClassLoader());
     cache = cacheManager.getCache("someCache7", Long.class, Person.class);
+    // there unfortunately isn't a public API to read statistics at the moment, see:
+    // https://github.com/ehcache/ehcache3/issues/1940
     managementRegistry = getManagementRegistryService(cacheManager);
   }
 

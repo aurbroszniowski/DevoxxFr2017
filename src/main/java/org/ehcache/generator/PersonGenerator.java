@@ -108,7 +108,7 @@ public class PersonGenerator implements ObjectGenerator<Person> {
       rawBytes = null;
     }
 
-    return new Person(name, age, height, weight, id, isEnrolled, gender, dob, doj, street, city, state, rawBytes);
+    return new Person(name, age, height, weight, id, isEnrolled, gender, dob, doj, street + " " + city + " " + state, rawBytes);
   }
 
   @Override

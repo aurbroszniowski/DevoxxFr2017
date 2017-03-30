@@ -77,7 +77,7 @@ public class PerfTestEx3 {
         .config(ConcurrencyConfig.concurrencyConfig()
             .threads(Runtime.getRuntime().availableProcessors())
             .timeout(30, TimeUnit.MINUTES))
-        .config(report(Results.class).log(text(), html("./target/Ex3-Rainfall-report-" + ENTRIES_MAX_COUNT)))
+        .config(report(Results.class).log(text(), html("./target/Ex3/Rainfall-report-" + ENTRIES_MAX_COUNT)))
         .start();
   }
 

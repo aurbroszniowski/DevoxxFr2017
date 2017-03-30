@@ -1,0 +1,26 @@
+<config
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns='http://www.ehcache.org/v3'
+    xmlns:mnm='http://www.ehcache.org/v3/management'
+    xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.3.xsd
+                        http://www.ehcache.org/v3/management http://www.ehcache.org/schema/ehcache-management-ext-3.3.xsd">
+
+  <service>
+    <mnm:management cache-manager-alias="someCacheManager8"/>
+  </service>
+  <persistence directory="./target/cache-data"/>
+
+  <cache alias="someCache8">
+    <key-type>java.lang.Long</key-type>
+    <value-type>org.ehcache.generator.Person</value-type>
+
+    <expiry>
+      <ttl unit="seconds">10</ttl>
+    </expiry>
+
+    <resources>
+      <heap unit="MB">10</heap>
+    </resources>
+  </cache>
+
+</config>

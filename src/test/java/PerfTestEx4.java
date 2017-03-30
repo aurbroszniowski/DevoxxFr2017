@@ -92,7 +92,7 @@ public class PerfTestEx4 {
               @Override
               public void summarize(final StatisticsHolder statisticsHolder) {
               }
-            }, html("./target/Ex4-Rainfall-report-" + ENTRIES_MAX_COUNT)))
+            }, html("./target/Ex4/Rainfall-report-" + ENTRIES_MAX_COUNT)))
         .start();
   }
 

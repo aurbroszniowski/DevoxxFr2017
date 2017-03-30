@@ -29,8 +29,7 @@ public class Person implements Serializable {
 
   public Person(String name, int age, float height, double weight, long id,
                 boolean isEnrolled, Gender gender, Date dateOfBirth,
-                Date dateOfJoining, String street, String city,
-                String state, byte[] raw) {
+                Date dateOfJoining, String address, byte[] raw) {
     this.name = name;
     this.age = age;
     this.height = height;
@@ -38,11 +37,7 @@ public class Person implements Serializable {
     this.id = id;
     this.isEnrolled = isEnrolled;
     this.gender = gender;
-    if (street == null && city == null && state == null) {
-      this.address = null;
-    } else {
-      this.address = street + " " + city + " " + state;
-    }
+    this.address = address;
     this.rawData = raw;
     this.dateOfBirth = dateOfBirth;
     this.dateOfJoining = dateOfJoining;

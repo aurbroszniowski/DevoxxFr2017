@@ -8,15 +8,14 @@
   <service>
     <mnm:management cache-manager-alias="someCacheManager7"/>
   </service>
+  <persistence directory="./target/cache-data"/>
 
   <cache alias="someCache7">
     <key-type>java.lang.Long</key-type>
     <value-type serializer="org.ehcache.serializers.PersonSerializer">org.ehcache.generator.Person</value-type>
 
     <resources>
-      <heap unit="entries">10000</heap>
-      <offheap unit="MB">100</offheap>
-      <disk unit="MB">200</disk>
+      <offheap unit="MB">10</offheap>
     </resources>
   </cache>
 

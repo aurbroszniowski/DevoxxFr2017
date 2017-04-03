@@ -3,17 +3,17 @@ package org.ehcache.config;
 import spark.Request;
 import spark.Response;
 import org.ehcache.generator.Person;
-import org.ehcache.service.SomeService;
+import org.ehcache.service.PersonService;
 
 import static spark.Spark.get;
 
 public class WebConfig {
 
   private static final String USER_SESSION_ID = "user";
-  private SomeService service;
+  private PersonService service;
 
 
-  public WebConfig(SomeService service) {
+  public WebConfig(PersonService service) {
     this.service = service;
     setupRoutes();
   }
@@ -22,7 +22,7 @@ public class WebConfig {
     get("/read/:id", (Request request, Response response) -> {
       try {
         long start = System.currentTimeMillis();
-        Person val = service.someLogic(Long.valueOf(request.params(":id")));
+        Person val = service.loadPerson(Long.valueOf(request.params(":id")));
         long end = System.currentTimeMillis();
         return val.toString() + "<br/>\n (this execution took " + (end - start) + "ms).";
       } catch (NumberFormatException e) {

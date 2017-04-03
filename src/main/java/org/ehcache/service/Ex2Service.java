@@ -20,7 +20,7 @@ import javax.cache.spi.CachingProvider;
  */
 
 @Service
-public class Ex2Service implements SomeService {
+public class Ex2Service implements PersonService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger("org.ehcache.Demo");
 
@@ -39,7 +39,7 @@ public class Ex2Service implements SomeService {
   }
 
   @Override
-  public Person someLogic(final Long id) {
+  public Person loadPerson(final Long id) {
     LOGGER.debug("---> Call to service 2");
 
     // TODO : Get the value from the cache directly instead

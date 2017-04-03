@@ -18,7 +18,7 @@ import javax.cache.spi.CachingProvider;
  */
 
 @Service
-public class Ex3Service implements SomeService {
+public class Ex3Service implements PersonService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger("org.ehcache.Demo");
 
@@ -35,7 +35,7 @@ public class Ex3Service implements SomeService {
   }
 
   @Override
-  public Person someLogic(final Long id) {
+  public Person loadPerson(final Long id) {
     Person value = cache.get(id);
     if (value != null) {
       return value;

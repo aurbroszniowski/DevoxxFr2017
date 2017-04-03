@@ -2,8 +2,7 @@ package org.ehcache.web;
 
 import org.ehcache.config.WebConfig;
 import org.ehcache.service.Ex0Service;
-import org.ehcache.service.Ex1Service;
-import org.ehcache.service.SomeService;
+import org.ehcache.service.PersonService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +16,7 @@ import static spark.Spark.get;
 @ComponentScan({ "org.ehcache" })
 public class ExampleApp {
 
-  private static Class<? extends SomeService> serviceClass = Ex0Service.class;
+  private static Class<? extends PersonService> serviceClass = Ex0Service.class;
 
   public static void main(String[] args) {
     AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(ExampleApp.class);

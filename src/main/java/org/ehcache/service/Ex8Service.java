@@ -22,7 +22,7 @@ import java.util.NoSuchElementException;
  */
 
 @Service
-public class Ex8Service implements SomeService {
+public class Ex8Service implements PersonService {
 
   private SomeRepository repository = new SomeRepository();
   private Cache<Long, Person> cache;
@@ -112,7 +112,7 @@ public class Ex8Service implements SomeService {
   }
 
   @Override
-  public Person someLogic(final Long id) {
+  public Person loadPerson(final Long id) {
     Person value = cache.get(id);
     if (value != null) {
       return value;

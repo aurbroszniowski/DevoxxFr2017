@@ -58,7 +58,7 @@ public class PerfTestEx7 {
 
                 long start = getTimeInNs();
                 // This is what we measure
-                service.someLogic(id);
+                service.loadPerson(id);
                 //
                 long end = getTimeInNs();
                 statisticsHolder.record(opName, (end - start), Results.READ);

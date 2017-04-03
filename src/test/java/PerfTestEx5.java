@@ -10,7 +10,6 @@ import io.rainfall.TestException;
 import io.rainfall.configuration.ConcurrencyConfig;
 import io.rainfall.generator.LongGenerator;
 import io.rainfall.generator.RandomSequenceGenerator;
-import io.rainfall.generator.StringGenerator;
 import io.rainfall.statistics.StatisticsHolder;
 import io.rainfall.statistics.StatisticsPeekHolder;
 import io.rainfall.unit.TimeDivision;
@@ -59,7 +58,7 @@ public class PerfTestEx5 {
 
                 long start = getTimeInNs();
                 // This is what we measure
-                service.someLogic(id);
+                service.loadPerson(id);
                 //
                 long end = getTimeInNs();
                 statisticsHolder.record(opName, (end - start), Results.READ);

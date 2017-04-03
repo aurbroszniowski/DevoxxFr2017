@@ -20,7 +20,7 @@ import javax.cache.spi.CachingProvider;
  */
 
 @Service
-public class Ex1Service implements SomeService {
+public class Ex1Service implements PersonService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger("org.ehcache.Demo");
 
@@ -41,7 +41,7 @@ public class Ex1Service implements SomeService {
   }
 
   @Override
-  public Person someLogic(final Long id) {
+  public Person loadPerson(final Long id) {
     LOGGER.debug("---> Call to service 1");
 
     // TODO implements Cache Aside pattern to cache the call to the repository

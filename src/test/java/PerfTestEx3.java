@@ -12,7 +12,7 @@ import io.rainfall.generator.RandomSequenceGenerator;
 import io.rainfall.statistics.StatisticsHolder;
 import io.rainfall.unit.TimeDivision;
 import org.ehcache.service.Ex3Service;
-import org.ehcache.service.SomeService;
+import org.ehcache.service.PersonService;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -42,7 +42,7 @@ public class PerfTestEx3 {
   public void perfTest() throws SyntaxException, URISyntaxException {
     final String opName = "SomeServiceOperation";
 
-    SomeService service = new Ex3Service();
+    PersonService service = new Ex3Service();
 
     LongGenerator generator = new LongGenerator();
 
@@ -60,7 +60,7 @@ public class PerfTestEx3 {
 
                 long start = getTimeInNs();
                 // This is what we measure
-                service.someLogic(id);
+                service.loadPerson(id);
                 //
                 long end = getTimeInNs();
                 statisticsHolder.record(opName, (end - start), Results.READ);

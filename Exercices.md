@@ -48,7 +48,7 @@ Exercice 5. Cache size
 Le sizing du cache et jsr107. Solutions des providers JCache.
 
 Exercice 6. Warmup et persistance
-Le warmup.
+Le warmup du cache
 Disk persistency
 
 Exercice 7. Plus de perf : les serializers

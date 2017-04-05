@@ -28,22 +28,14 @@ public class Ex2Service implements PersonService {
   private Cache<Long, Person> cache;
 
   public Ex2Service() {
-    CachingProvider provider = Caching.getCachingProvider("org.ehcache.jsr107.EhcacheCachingProvider");
-    CacheManager cacheManager = provider.getCacheManager();
-
-    MutableConfiguration<Long, Person> configuration = new MutableConfiguration<>();
-    configuration.setTypes(Long.class, Person.class);
-    configuration.setCacheLoaderFactory(new FactoryBuilder.ClassFactory<>("org.ehcache.service.SomeCacheLoader"));
-    configuration.setReadThrough(true);
-    cache = cacheManager.createCache("someCache2", configuration);
+    // TODO : Create cache which uses a cache loader org.ehcache.service.SomeCacheLoader
   }
 
   @Override
   public Person loadPerson(final Long id) {
     LOGGER.debug("---> Call to service 2");
 
-    // TODO : Get the value from the cache directly instead
-    Person val = cache.get(id);
-    return val;
+    // TODO : Get the value from the cache directly
+    return null;
   }
 }

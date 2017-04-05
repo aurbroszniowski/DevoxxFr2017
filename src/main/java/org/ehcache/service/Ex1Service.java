@@ -14,9 +14,8 @@ import javax.cache.spi.CachingProvider;
 
 /**
  * Example service : Cache aside
- *
+ * <p>
  * Please implement TODO lines
- *
  */
 
 @Service
@@ -29,15 +28,10 @@ public class Ex1Service implements PersonService {
 
   public Ex1Service() {
     // TODO : get Ehcache as caching provider ("org.ehcache.jsr107.EhcacheCachingProvider")
-    CachingProvider cachingProvider = Caching.getCachingProvider("org.ehcache.jsr107.EhcacheCachingProvider");
 
     // TODO : Get javax.cache.CacheManager from caching provider
-    CacheManager cacheManager = cachingProvider.getCacheManager();
 
-    MutableConfiguration<Long, Person> configuration = new MutableConfiguration<>();
-    configuration.setTypes(Long.class, Person.class);
     // TODO Create Cache
-    cache = cacheManager.createCache("someCache1", configuration);
   }
 
   @Override
@@ -46,19 +40,12 @@ public class Ex1Service implements PersonService {
 
     // TODO implements Cache Aside pattern to cache the call to the repository
     // pattern :
-
     // is value in cache for the id?
-    Person value = cache.get(id);
-    if (value != null){
-      // if yes -> return value
-      return value;
-    }
+    // if yes -> return value
     // if not -> read it from the repository
-    value = repository.readFromDb(id);
     // then put it in the cache
-    cache.put(id, value);
     // then return it
-    return value;
+    return null;
   }
 }
 

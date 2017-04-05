@@ -33,9 +33,7 @@ import static io.rainfall.generator.sequence.Distribution.SLOW_GAUSSIAN;
  */
 public class PerfTestEx4 {
 
-  private static final int ENTRIES_MAX_COUNT = 100;
-//  private static int ENTRIES_MAX_COUNT = 200;
-//  private static int ENTRIES_MAX_COUNT = 1000;
+  private static final int ENTRIES_MAX_COUNT = 1000;
 
   @Test
   @Ignore

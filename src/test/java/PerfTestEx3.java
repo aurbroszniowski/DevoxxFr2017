@@ -34,6 +34,7 @@ import static io.rainfall.generator.sequence.Distribution.SLOW_GAUSSIAN;
 public class PerfTestEx3 {
 
   private static final int ENTRIES_MAX_COUNT = 100;
+  // TODO : mesurer les performances avec plusieurs valeurs de load
 //  private static int ENTRIES_MAX_COUNT = 200;
 //  private static int ENTRIES_MAX_COUNT = 1000;
 

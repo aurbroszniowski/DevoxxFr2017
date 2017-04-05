@@ -39,13 +39,13 @@ Exercice 2. Cache pattern : Cache through
 Utiliser la pattern Cache Through.
 
 Exercice 3. Tests de performances de votre application.
-Lancer différents tests de charges pour mesurer les gains de performances (volume de 100, 10000 et 1000000 de données).
+Lancer différents tests de charges pour mesurer les gains de performances (volume de 100, 200 et 1000 de données).
 
 Exercice 4. Les statistiques.
 Utiliser les statistiques jsr107 dans le cadre des tests de performance.
 
 Exercice 5. Cache size
-Le sizing du cache et jsr107. Solutions des providers JCache.
+Le sizing du cache et jsr107.
 
 Exercice 6. Warmup et persistance
 Le warmup du cache

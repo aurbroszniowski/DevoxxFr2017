@@ -41,7 +41,8 @@
     <dependency>
       <groupId>com.sparkjava</groupId>
       <artifactId>spark-core</artifactId>
-      <version>2.5</version>
+      <version>2.5
+      </version>
     </dependency>
 
     <dependency>
@@ -135,6 +136,14 @@
       <id>oss-sonatype</id>
       <name>oss-sonatype</name>
       <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>oss-terracotta</id>
+      <name>oss-terracotta</name>
+      <url>http://repo.terracotta.org/maven2</url>
       <snapshots>
         <enabled>true</enabled>
       </snapshots>

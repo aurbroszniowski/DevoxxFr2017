@@ -5,7 +5,7 @@
 
 L'URL de test est :
 
-[http://localhost:4567/read/something](http://localhost:4567/read/something)
+[http://localhost:4567/read/something](http://localhost:4567/read/1)
 
 
 Vous pouvez aussi démarrer l'application depuis votre Editeur en exécutant la classe ```org.ehcache.web.ExampleApp```

@@ -8,7 +8,7 @@
   <service>
     <mnm:management cache-manager-alias="someCacheManager6"/>
   </service>
-  <persistence directory="./target/cache-data"/>
+  <persistence directory="./target/cache-data6"/>
 
   <cache alias="someCache6">
     <key-type>java.lang.Long</key-type>
